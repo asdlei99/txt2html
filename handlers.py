@@ -13,40 +13,30 @@ class HTMLHandler(object):
         ])
         
     def start(self, name):
-        str = ''
-        if name == 'document':
-            str = '<html>\n\t<head>\n\t\t<title>\n\t\tShiYanLou\n\t\t</title>\n\t</head>\n\t<body>'
-        elif name == 'paragraph':
-            str = '\n\t\t<p style="color: #444;">'
-        elif name == 'heading':
-            str = '\n\t\t<h2 style="color: #68BE5D;">'
-        elif name == 'list':
-            str = '\n\t\t<ul style="color: #363736;">'
-        elif name == 'listitem':
-            str = '\n\t\t<li>'
-        elif name == 'title':
-            str = '\n\t\t<h1 style="color: #1ABC9C;">'
+        str = {
+        'document': '<html>\n\t<head>\n\t\t<title>\n\t\t'+ self.output[:-5] +'\n\t\t</title>\n\t</head>\n\t<body>',
+        'paragraph': '\n\t\t<p style="color: #444;">',
+        'heading': '\n\t\t<h2 style="color: #68BE5D;">',
+        'list': '\n\t\t<ul style="color: #363736;">',
+        'listitem': '\n\t\t<li>',
+        'title': '\n\t\t<h1 style="color: #1ABC9C;">'
+        }
            
         with open(self.output, 'a') as f:
-            f.write(str) 
+            f.write(str[name]) 
             
     def end(self, name):
-        str = ''
-        if name == 'document':
-            str = '\n\t</body>\n</html>'
-        elif name == 'paragraph':
-            str = '</p>'
-        elif name == 'heading':
-            str = '</h2>'
-        elif name == 'list':
-            str = '\n\t\t</ul>'
-        elif name == 'listitem':
-            str = '</li>'
-        elif name == 'title':
-            str = '</h1>'
+        str = {
+        'document': '\n\t</body>\n</html>',
+        'paragraph': '</p>',
+        'heading': '</h2>',
+        'list': '\n\t\t</ul>',
+        'listitem': '</li>',
+        'title': '</h1>'
+        }
            
         with open(self.output, 'a') as f:
-            f.write(str)
+            f.write(str[name])
         
     def sub(self, name):
         def substitution(match):

@@ -3,8 +3,8 @@
 import argparse, rules, handlers
 
 argparser = argparse.ArgumentParser()
-argparser.add_argument('file', help='the text file')
-argparser.add_argument('-o', '--output', help='the filename of the output, default: output.html')
+argparser.add_argument('file', help='the text file, eg. abc.txt')
+argparser.add_argument('-o', '--output', help='the name of the .html file and the page, default: output.html')
 args = argparser.parse_args()
 
 def blocks(file):
