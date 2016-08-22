@@ -23,4 +23,4 @@ Use the `-h` to check out usage.
 
 * supports URL, MAIL and EMPHASIS   支持URL、邮箱和强调句子
 * supports TITLE, HEADING, LISTITEM and PARAGRAPH with lines   支持大标题、二级标题、表项和多行段落
-* simple but helps in easy job ​:relaxed:​
+* simple but helps in easy job ​:smile:​
