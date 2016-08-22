@@ -1,0 +1,24 @@
+## TITLE: example
+
+## Heading 1
+
+A title or a heading should be starting with '##', less than 30 chars, in one line and without ':' in tail.
+The difference is that a title is top, otherwise it would be a heading.
+
+## Heading 2
+
+- listitem 1: one block
+
+- listitem 2: another block
+
+- listitem 3: another block
+
+## Heading 3
+
+This is a URL: http://github.com
+This is a e-mail: xxx@example.xxx
+
+## Heading 4
+
+Each title, heading, listitem or paragraph must be an independent block.
+emphasis: *Each title, heading, listitem or paragraph must be an independent block.*

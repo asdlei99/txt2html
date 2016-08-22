@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import argparse, rules, handlers
+import argparse
+from mylibs import rules, handlers
 
 argparser = argparse.ArgumentParser()
 argparser.add_argument('file', help='the text file, eg. abc.txt')

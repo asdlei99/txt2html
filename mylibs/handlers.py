@@ -7,6 +7,7 @@ class HTMLHandler(object):
     def __init__(self, html_file):
         self.output = html_file
         self.patterns = OrderedDict([
+        ('next_line', r'\n'),
         ('emphasis', r'\*(.+?)\*'),
         ('url', r'((http|https)://[\.a-zA-Z]+)'),
         ('mail', r'([\.a-zA-Z]+@[\.a-zA-Z]+[a-zA-Z]+)')
@@ -15,11 +16,11 @@ class HTMLHandler(object):
     def start(self, name):
         str = {
         'document': '<html>\n\t<head>\n\t\t<title>\n\t\t'+ self.output[:-5] +'\n\t\t</title>\n\t</head>\n\t<body>',
-        'paragraph': '\n\t\t<p style="color: #444;">',
+        'title': '\n\t\t<h1 style="color: #1ABC9C;">',
         'heading': '\n\t\t<h2 style="color: #68BE5D;">',
         'list': '\n\t\t<ul style="color: #363736;">',
         'listitem': '\n\t\t<li>',
-        'title': '\n\t\t<h1 style="color: #1ABC9C;">'
+        'paragraph': '\n\t\t<p style="color: #444;">'
         }
            
         with open(self.output, 'a') as f:
@@ -28,11 +29,11 @@ class HTMLHandler(object):
     def end(self, name):
         str = {
         'document': '\n\t</body>\n</html>',
-        'paragraph': '</p>',
+        'title': '</h1>',        
         'heading': '</h2>',
         'list': '\n\t\t</ul>',
         'listitem': '</li>',
-        'title': '</h1>'
+        'paragraph': '</p>'
         }
            
         with open(self.output, 'a') as f:
@@ -40,13 +41,18 @@ class HTMLHandler(object):
         
     def sub(self, name):
         def substitution(match):
-            if name == 'emphasis':
+            if name == 'next_line':
+                return self.sub_next_line()
+            elif name == 'emphasis':
                 return self.sub_emphasis(match)
             elif name == 'url':
                 return self.sub_url(match)
             elif name == 'mail':
                 return self.sub_mail(match)
         return substitution
+        
+    def sub_next_line(self):
+        return '<br />'
 
     def sub_emphasis(self, match):
         return '<em>%s</em>' % match.group(1)
@@ -60,5 +66,6 @@ class HTMLHandler(object):
     def handle_block(self, block):
         for name,pattern in self.patterns.items():
             block = re.sub(pattern, self.sub(name), block)
+        
         with open(self.output, 'a') as f:
             f.write(block)

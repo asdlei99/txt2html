@@ -10,7 +10,13 @@ class HTMLRule(object):
 class HeadingRule(HTMLRule):
     type = 'heading'
     def judge(self, block):
-        return not '\n' in block and len(block) <= 70 and not block[-1] == ':'
+        return block[0] == block[1] == '#' and not '\n' in block and len(block) <= 30 and not block[-1] == ':'
+        
+    def action(self, block, handler):
+        handler.start(self.type)
+        handler.handle_block(block.strip('# '))
+        handler.end(self.type)
+        return True
         
 class TitleRule(HeadingRule):
     type = 'title'
